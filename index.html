@@ -866,9 +866,46 @@ footer {
   font-family: 'Lato', sans-serif;
   cursor: pointer;
 }
+
+/* ── MUSIC CONTROL ── */
+.music-control {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.9);
+  border: 1px solid rgba(18,137,167,0.3);
+  border-radius: 50%;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  font-size: 20px;
+  transition: all 0.3s ease;
+}
+.music-control:hover { transform: scale(1.1); background: #ffffff; }
+.music-control.playing { animation: pulse 2s infinite; }
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(18,137,167,0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(18,137,167,0); }
+  100% { box-shadow: 0 0 0 0 rgba(18,137,167,0); }
+}
 </style>
 </head>
 <body>
+
+<!-- Background Music -->
+<audio id="bg-music" loop>
+  <source src="WhatsApp Audio 2026-03-06 at 5.31.35 PM.mpeg" type="audio/mpeg">
+</audio>
+
+<!-- Music Toggle Button -->
+<div id="music-toggle" class="music-control">
+  <span id="music-icon">🎵</span>
+</div>
 
 <!-- ===== S1: HERO ===== -->
 <section id="s1">
@@ -1177,6 +1214,10 @@ invitationSections.forEach(id => {
 if (footer) footer.style.display = 'none';
 
 // ── SMOOTH scroll and Reveal sections ──
+const bgMusic = document.getElementById('bg-music');
+const musicToggle = document.getElementById('music-toggle');
+const musicIcon = document.getElementById('music-icon');
+
 document.querySelector('.hero-btn').addEventListener('click', e => {
   e.preventDefault();
   const hero = document.getElementById('s1');
@@ -1189,6 +1230,11 @@ document.querySelector('.hero-btn').addEventListener('click', e => {
   });
   if (footer) footer.style.display = 'block';
 
+  // Play Music
+  bgMusic.play().catch(err => console.log("Music play blocked by browser:", err));
+  musicToggle.style.display = 'flex';
+  musicToggle.classList.add('playing');
+
   const target = document.getElementById(targetId);
   
   // Smooth scroll first
@@ -1200,6 +1246,19 @@ document.querySelector('.hero-btn').addEventListener('click', e => {
     // Trigger IntersectionObserver for new visible sections
     document.querySelectorAll('.reveal').forEach(el => io.observe(el));
   }, 800);
+});
+
+// ── MUSIC TOGGLE LOGIC ──
+musicToggle.addEventListener('click', () => {
+  if (bgMusic.paused) {
+    bgMusic.play();
+    musicIcon.textContent = '🎵';
+    musicToggle.classList.add('playing');
+  } else {
+    bgMusic.pause();
+    musicIcon.textContent = '🔇';
+    musicToggle.classList.remove('playing');
+  }
 });
 
 // ── SLIDER DOT SYNC ──
