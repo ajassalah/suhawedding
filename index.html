@@ -273,7 +273,7 @@ body {
 /* Couple photo — rounded card style */
 .s2-photo {
   width: 100%; /* Fit screen */
-  margin: 0 0 10px; /* Reduced space between s2 and s3 */
+  margin: 0; /* Removed space between s2 and s3 */
   aspect-ratio: 3/4;
   border-radius: 0 0 40px 40px; /* Only bottom round */
   display: flex;
@@ -304,7 +304,7 @@ body {
 /* ===== SECTION 3: Dear friends ===== */
 #s3 {
   background: var(--blush-light);
-  padding: 20px 0 0; /* Reduced top padding */
+  padding: 0; /* Completely removed top padding */
   text-align: center;
   position: relative;
 }
@@ -443,7 +443,7 @@ body {
 /* ===== SECTION 4: DRESS CODE ===== */
 #s4 {
   background: var(--blush-light);
-  padding: 44px 0 20px; /* Reduced bottom padding between s4 and rsvp */
+  padding: 44px 0 0px; /* Removed bottom padding between s4 and rsvp */
   overflow: hidden;
 }
 
@@ -530,16 +530,16 @@ body {
 
 /* Specific Block for Men */
 .dc-mens-block {
-  padding: 0 24px; /* Restored side gap */
+  padding: 0 24px;
   margin-bottom: 40px;
-  margin-top: -70px;
+  margin-top: 20px; /* Moved down as requested */
   position: relative;
 }
 .dc-mens-text {
   font-family: 'Rufina', serif;
   font-size: 16px;
   color: var(--text);
-  margin-top: -100px; /* Moved up even further */
+  margin-top: -180px; /* Moved up as requested */
   margin-bottom: 60px;
   max-width: 60%;
 }
@@ -559,7 +559,6 @@ body {
   font-family: 'Rufina', serif;
   font-size: 16px;
   color: var(--text);
-  margin-top: -80px; /* Moved up to start the arrow */
   padding-top: 15px;
 }
 
@@ -582,7 +581,7 @@ body {
 .arrow-16 {
   width: 140px;
   height: auto;
-  top: -30px;
+  top: 40px; /* Moved arrow down to match the image move */
   left: 90px; 
 }
 
