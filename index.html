@@ -37,6 +37,11 @@ body {
   max-width: 450px;
   margin: 0 auto;
   position: relative;
+  
+  /* Prevent Text Selection & Long Press */
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 /* ===== SECTION 1: CLEAN HERO with frame ===== */
@@ -82,9 +87,10 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: min(500px, 130vw);
-  height: min(500px, 130vw);
-  max-width: calc(100vw + 100px); /* Allow a bit of bleed but cap it */
+  width: min(500px, 100vw);
+  height: min(500px, 100vw);
+  max-width: 100vw; /* Keeps it strictly inside the screen */
+  object-fit: contain;
   z-index: 5;
   pointer-events: none;
   opacity: 0;
@@ -304,7 +310,7 @@ body {
 /* ===== SECTION 3: Dear friends ===== */
 #s3 {
   background: var(--blush-light);
-  padding: 0; /* Completely removed top padding */
+  padding: 40px 0 0; /* Added space back to the top of the greeting section */
   text-align: center;
   position: relative;
 }
@@ -351,11 +357,13 @@ body {
 }
 
 .countdown-label {
-  font-family: 'Beau Rivage', cursive;
-  font-size: 28px;
-  color: var(--script-color);
-  margin-bottom: 16px;
+  font-family: 'Libre Baskerville', serif;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 24px;
   letter-spacing: 0.3px;
+  text-align: center;
 }
 
 .timer-display {
@@ -531,16 +539,16 @@ body {
 /* Specific Block for Men */
 .dc-mens-block {
   padding: 0 24px;
-  margin-bottom: 40px;
-  margin-top: 180px; /* Moved down to prevent overflow from e4.jpg */
+  margin-bottom: 0;
+  margin-top: 80px; 
   position: relative;
 }
 .dc-mens-text {
   font-family: 'Rufina', serif;
   font-size: 16px;
   color: var(--text);
-  margin-top: -380px; /* Moved even further up as requested */
-  margin-bottom: 60px;
+  margin-top: -240px; /* Pulls text up into the space near the previous image */
+  margin-bottom: 140px; /* Increased space between text and image below */
   max-width: 60%;
 }
 
@@ -548,10 +556,10 @@ body {
 .dc-colors-block {
   display: flex;
   align-items: flex-start;
-  padding: 0 24px; /* Restored side gap */
+  padding: 0 24px;
   gap: 14px;
   margin-bottom: 50px;
-  margin-top: 30px;
+  margin-top: 24px; /* Added some breathing space */
   position: relative;
 }
 .dc-colors-text {
@@ -581,8 +589,8 @@ body {
 .arrow-16 {
   width: 140px;
   height: auto;
-  top: 120px; /* Adjusted to point correctly from the higher text to the lower image */
-  left: 90px; 
+  top: 30px; /* Repositioned to start from the top of the elevated text */
+  left: 100px; 
 }
 
 .arrow-17 {
@@ -900,7 +908,7 @@ footer {
 
 <!-- Background Music -->
 <audio id="bg-music" loop>
-  <source src="WhatsApp Audio 2026-03-06 at 5.31.35 PM.mpeg" type="audio/mpeg">
+  <source src="arabic Music.mpeg" type="audio/mpeg">
 </audio>
 
 <!-- Music Toggle Button -->
@@ -970,6 +978,7 @@ footer {
   </div>
 
   <!-- Countdown -->
+  <p class="countdown-label reveal">THE EVENT STARTS IN:</p>
   <div class="countdown-area reveal">
     <div class="timer-display">
       <div class="timer-item">
@@ -1000,13 +1009,16 @@ footer {
     <img src="unnamed.jpg" alt="Couple 2">
     <img src="WhatsApp Image 2026-03-05 at 2.04.32 PM.jpeg" alt="Couple 3">
     <img src="WhatsApp Image 2026-03-05 aM.jpeg" alt="Couple 4">
+    <img src="engagment\e2.jpg" alt="Couple 9">
     <img src="WhatsApp Image 2026-03-05 at 1.56.10 PM.jpeg" alt="Couple 5">
     <img src="WhatsApp Image 2026-03-05 at 1.58.41 PM.jpeg" alt="Couple 6">
     <img src="engagment\e5.jpg" alt="Couple 7">
     <img src="engagment\DSC_8061.jpg" alt="Couple 8">
     <img src="engagment\unnamed.jpg" alt="Couple 9">
     <img src="engagment\DSC_8048.jpg" alt="Couple 9">
-  </div>
+    <img src="engagment\WhatsApp Image 2026-03-07 at 8.54.36 PM.jpeg" alt="Couple 9">
+    <img src="engagment\WhatsApp Image 2026-03-07 at 8.54.37 PM.jpeg" alt="Couple 9">
+    </div>
  
   <div class="slider-dots" id="beach-dots">
     <div class="dot active"></div>
@@ -1019,7 +1031,10 @@ footer {
     <div class="dot active"></div>
     <div class="dot active"></div>
     <div class="dot active"></div> 
-  </div>
+    <div class="dot active"></div> 
+    <div class="dot active"></div> 
+    <div class="dot active"></div> 
+    </div>
 </section>
 
 <!-- ===== S4: DRESS CODE ===== -->
@@ -1036,7 +1051,7 @@ footer {
   <!-- Full-width top photo -->
   <div style="padding: 0 20px; margin-bottom: 32px;" class="reveal">
     <div class="dc-photo-card" style="aspect-ratio: 16/11;">
-      <img src="engagment\e2.jpg" alt="Ladies Group" style="width:100%; height:100%; object-fit:cover;">
+      <img src="engagment\Gemini_Generated_Image_88bl1d88bl1d88bl.png" alt="Ladies Group" style="width:100%; height:100%; object-fit:cover;">
     </div>
   </div>
 
@@ -1064,8 +1079,8 @@ footer {
      Collecting Memories<br>with the best<br>of the best 
       <img src="arrow_16.png.webp" class="dc-arrow-img arrow-16" alt="Arrow">
     </div>
-    <div class="dc-photo-card" style="aspect-ratio: 16/10;">
-      <img src="engagment\e3.jpg" alt="Men's Fashion" style="width:100%; height:100%; object-fit:cover; object-position: top;">
+    <div class="dc-photo-card">
+      <img src="engagment\WhatsApp Image 2026-03-07 at 8.54.34 PM.jpeg" alt="Men's Fashion" style="width:100%; height:auto; display:block; object-fit:contain;">
     </div>
   </div>
 
@@ -1302,6 +1317,37 @@ rsvpForm.addEventListener('submit', (e) => {
 function closeSuccess() {
   successModal.classList.remove('active');
 }
+
+// ── SECURITY LOGIC (Screenshot / Screen Recording Deterrents) ──
+// Note: It is technically impossible to 100% stop screenshots, but this deters 99% of simple attempts.
+
+// 1. Prevent Right-Click menu
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// 2. Prevent Keyboard Shortcuts (PrintScreen, Save, Copy, Print, DevTools)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'PrintScreen' ||
+      (e.ctrlKey && (e.key === 'p' || e.key === 's' || e.key === 'c' || e.key === 'u' || e.key === 'a')) ||
+      e.key === 'F12' || 
+      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J'))) {
+    e.preventDefault();
+    return false;
+  }
+});
+
+// 3. Blur the screen if they open Snipping Tool or screen recorder (loses window focus)
+window.addEventListener('blur', () => {
+  document.body.style.filter = 'blur(15px)';
+});
+window.addEventListener('focus', () => {
+  document.body.style.filter = 'none';
+});
+
+// 4. Prevent touch drag to prevent mobile screen grab tricks
+document.addEventListener('touchmove', function(e) {
+  // Only allow scrolling, no dragging UI
+}, { passive: true });
+
 </script>
 </body>
 </html>
