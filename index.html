@@ -428,6 +428,37 @@ body {
 }
 .dot.active { background: #1289A7; width: 22px; border-radius: 4px; }
 
+.s3-photo-wrapper {
+  position: relative;
+  width: 100%;
+  margin-top: 32px;
+  border-radius: 0 0 40px 40px;
+  overflow: hidden;
+}
+
+.swipe-hint {
+  position: absolute;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 20px;
+  pointer-events: none;
+  z-index: 10;
+  animation: swipeAnim 2s infinite;
+  font-size: 14px;
+  font-family: 'Lato', sans-serif;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+@keyframes swipeAnim {
+  0% { transform: translate(0, -50%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translate(-30px, -50%); opacity: 0; }
+}
+
 .s3-photo {
   width: 100%;
   aspect-ratio: 4/5;
@@ -436,8 +467,6 @@ body {
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  margin-top: 32px;
-  border-radius: 0 0 40px 40px;
 }
 .s3-photo::-webkit-scrollbar { display: none; }
 .s3-photo img {
@@ -902,6 +931,11 @@ footer {
   70% { box-shadow: 0 0 0 10px rgba(18,137,167,0); }
   100% { box-shadow: 0 0 0 0 rgba(18,137,167,0); }
 }
+
+/* ── PREVENT PRINT/SCREENSHOT ── */
+@media print {
+  html, body { display: none !important; }
+}
 </style>
 </head>
 <body>
@@ -943,7 +977,9 @@ footer {
       <span class="s2-info-label">date</span>
     </div>
     <div class="s2-info-col">
-      <span class="s2-info-value">Lee Meridian Hall</span>
+      <a href="https://maps.app.goo.gl/ve1gDEakodQDAzgp7" target="_blank" style="text-decoration: none; color: inherit; display: flex; flex-direction: column; align-items: center;">
+        <span class="s2-info-value">Lee Meridian Hall</span>
+      </a>
       <span class="s2-info-label">place</span>
     </div>
   </div>
@@ -1004,21 +1040,26 @@ footer {
   </div>
 
   <!-- Beach couple photo Slider -->
-  <div class="s3-photo reveal" id="beach-slider">
-    <img src="Gemini_Generated_Image_yu468yu468yu468y.png" alt="Couple 1">
-    <img src="unnamed.jpg" alt="Couple 2">
-    <img src="WhatsApp Image 2026-03-05 at 2.04.32 PM.jpeg" alt="Couple 3">
-    <img src="WhatsApp Image 2026-03-05 aM.jpeg" alt="Couple 4">
-    <img src="engagment\e2.jpg" alt="Couple 9">
-    <img src="WhatsApp Image 2026-03-05 at 1.56.10 PM.jpeg" alt="Couple 5">
-    <img src="WhatsApp Image 2026-03-05 at 1.58.41 PM.jpeg" alt="Couple 6">
-    <img src="engagment\e5.jpg" alt="Couple 7">
-    <img src="engagment\DSC_8061.jpg" alt="Couple 8">
-    <img src="engagment\unnamed.jpg" alt="Couple 9">
-    <img src="engagment\DSC_8048.jpg" alt="Couple 9">
-    <img src="engagment\WhatsApp Image 2026-03-07 at 8.54.36 PM.jpeg" alt="Couple 9">
-    <img src="engagment\WhatsApp Image 2026-03-07 at 8.54.37 PM.jpeg" alt="Couple 9">
+  <div class="s3-photo-wrapper reveal">
+    <div class="swipe-hint" id="swipe-hint">
+      <span>&larr; Swipe</span>
     </div>
+    <div class="s3-photo" id="beach-slider">
+      <img src="Gemini_Generated_Image_yu468yu468yu468y.png" alt="Couple 1">
+      <img src="unnamed.jpg" alt="Couple 2">
+      <img src="WhatsApp Image 2026-03-05 at 2.04.32 PM.jpeg" alt="Couple 3">
+      <img src="WhatsApp Image 2026-03-05 aM.jpeg" alt="Couple 4">
+      <img src="engagment\e2.jpg" alt="Couple 9">
+      <img src="WhatsApp Image 2026-03-05 at 1.56.10 PM.jpeg" alt="Couple 5">
+      <img src="WhatsApp Image 2026-03-05 at 1.58.41 PM.jpeg" alt="Couple 6">
+      <img src="engagment\e5.jpg" alt="Couple 7">
+      <img src="engagment\DSC_8061.jpg" alt="Couple 8">
+      <img src="engagment\unnamed.jpg" alt="Couple 9">
+      <img src="engagment\DSC_8048.jpg" alt="Couple 9">
+      <img src="engagment\WhatsApp Image 2026-03-07 at 8.54.36 PM.jpeg" alt="Couple 9">
+      <img src="engagment\WhatsApp Image 2026-03-07 at 8.54.37 PM.jpeg" alt="Couple 9">
+    </div>
+  </div>
  
   <div class="slider-dots" id="beach-dots">
     <div class="dot active"></div>
@@ -1147,7 +1188,7 @@ footer {
 <!-- SUCCESS MODAL STRUCTURE -->
 <div id="success-modal" class="success-modal">
   <div class="success-content">
-    <p class="success-msg">Thank you for your Attendance ,<br>We will See in Lee Meridian Hall...✨❤️</p>
+    <p class="success-msg">Thank you for your Attendance ,<br>will See in Lee Meridian Hall...✨❤️</p>
     <button class="success-btn" onclick="closeSuccess()">Close</button>
   </div>
 </div>
@@ -1292,8 +1333,10 @@ musicToggle.addEventListener('click', () => {
 // ── SLIDER DOT SYNC ──
 const slider = document.getElementById('beach-slider');
 const dots = document.querySelectorAll('#beach-dots .dot');
+const swipeHint = document.getElementById('swipe-hint');
 
 slider.addEventListener('scroll', () => {
+  if (swipeHint) swipeHint.style.display = 'none';
   const index = Math.round(slider.scrollLeft / slider.offsetWidth);
   dots.forEach((dot, i) => {
     dot.classList.toggle('active', i === index);
