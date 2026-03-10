@@ -942,7 +942,7 @@ footer {
 
 <!-- Background Music -->
 <audio id="bg-music" loop>
-  <source src="arabic Music.mpeg" type="audio/mpeg">
+  <source src="Theme final.mpeg" type="audio/mpeg">
 </audio>
 
 <!-- Music Toggle Button -->
@@ -1048,16 +1048,17 @@ footer {
       <img src="Gemini_Generated_Image_yu468yu468yu468y.png" alt="Couple 1">
       <img src="unnamed.jpg" alt="Couple 2">
       <img src="WhatsApp Image 2026-03-05 at 2.04.32 PM.jpeg" alt="Couple 3">
-      <img src="WhatsApp Image 2026-03-05 aM.jpeg" alt="Couple 4">
-      <img src="engagment\e2.jpg" alt="Couple 9">
-      <img src="WhatsApp Image 2026-03-05 at 1.56.10 PM.jpeg" alt="Couple 5">
-      <img src="WhatsApp Image 2026-03-05 at 1.58.41 PM.jpeg" alt="Couple 6">
       <img src="engagment\e5.jpg" alt="Couple 7">
-      <img src="engagment\DSC_8061.jpg" alt="Couple 8">
-      <img src="engagment\unnamed.jpg" alt="Couple 9">
+      <img src="WhatsApp Image 2026-03-05 at 1.58.41 PM.jpeg" alt="Couple 6">
       <img src="engagment\DSC_8048.jpg" alt="Couple 9">
+      <img src="engagment\unnamed.jpg" alt="Couple 9">
       <img src="engagment\WhatsApp Image 2026-03-07 at 8.54.36 PM.jpeg" alt="Couple 9">
+      <img src="engagment\unnamed.jpg" alt="Couple 9">
+      <img src="engagment\DSC_8061.jpg" alt="Couple 8">
       <img src="engagment\WhatsApp Image 2026-03-07 at 8.54.37 PM.jpeg" alt="Couple 9">
+      <img src="engagment\e2.jpg" alt="Couple 9">
+      <img src="engagment\e6.jpg" alt="Couple 9">
+      <img src="WhatsApp Image 2026-03-05 at 1.56.10 PM.jpeg" alt="Couple 5">
     </div>
   </div>
  
@@ -1074,6 +1075,7 @@ footer {
     <div class="dot active"></div> 
     <div class="dot active"></div> 
     <div class="dot active"></div> 
+    <div class="dot active"></div>
     <div class="dot active"></div> 
     </div>
 </section>
@@ -1083,6 +1085,7 @@ footer {
   <div class="s4-top reveal">
     <h2 class="dc-title">Here our some Engagement  Memories...!!✨❤️</h2>
     <p class="dc-sub">
+      “Our engagement was not just a moment, but the beginning of a beautiful story written by Allah.”<br>
       Wishing you a lifetime of love, laughter, and happiness as you begin this exciting new chapter together.
       So thrilled for you both and looking forward to celebrating your "happily ever after". 
       Cheers to the perfect couple and a beautiful future ahead! <br>
@@ -1220,8 +1223,9 @@ footer {
 
 <!-- ===== FOOTER ===== -->
 <footer>
-  <p class="footer-names">Hope to see you there!</p>
-  <p class="footer-names small">Faiyaz &amp; Amna</p>
+  <p class="footer-names">By the grace of Allah, we invite you to celebrate the Nikah of </p>
+   <p class="footer-names small">Faiyaz & Amna</p>
+   <p class="footer-names">"Your presence will make our day even more special...!!"</p>
   <div style="margin-top: 15px;">
     <img src="image copy 2.png" style="width: 40px; height: auto; opacity: 0.8; filter: grayscale(1) brightness(0.3);" alt="Footer Ornament">
   </div>
@@ -1343,6 +1347,33 @@ slider.addEventListener('scroll', () => {
   });
 });
 
+// ── SLIDER DRAG TO SCROLL (DESKTOP) ──
+let isDown = false;
+let startX;
+let scrollLeft;
+
+slider.addEventListener('mousedown', (e) => {
+  isDown = true;
+  startX = e.pageX - slider.offsetLeft;
+  scrollLeft = slider.scrollLeft;
+  slider.style.scrollSnapType = 'none'; // Disable snap while dragging
+});
+slider.addEventListener('mouseleave', () => {
+  isDown = false;
+  slider.style.scrollSnapType = 'x mandatory';
+});
+slider.addEventListener('mouseup', () => {
+  isDown = false;
+  slider.style.scrollSnapType = 'x mandatory';
+});
+slider.addEventListener('mousemove', (e) => {
+  if (!isDown) return;
+  e.preventDefault();
+  const x = e.pageX - slider.offsetLeft;
+  const walk = (x - startX) * 2; // Scroll speed multiplier
+  slider.scrollLeft = scrollLeft - walk;
+});
+
 // ── RSVP SUBMISSION LOGIC ──
 const rsvpForm = document.getElementById('rsvp-form');
 const successModal = document.getElementById('success-modal');
@@ -1370,20 +1401,34 @@ document.addEventListener('contextmenu', e => e.preventDefault());
 // 2. Prevent Keyboard Shortcuts (PrintScreen, Save, Copy, Print, DevTools)
 document.addEventListener('keydown', (e) => {
   if (e.key === 'PrintScreen' ||
-      (e.ctrlKey && (e.key === 'p' || e.key === 's' || e.key === 'c' || e.key === 'u' || e.key === 'a')) ||
+      ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 's' || e.key === 'c' || e.key === 'u' || e.key === 'a')) ||
       e.key === 'F12' || 
-      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J'))) {
+      ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J'))) {
     e.preventDefault();
     return false;
   }
 });
 
-// 3. Blur the screen if they open Snipping Tool or screen recorder (loses window focus)
-window.addEventListener('blur', () => {
-  document.body.style.filter = 'blur(15px)';
+// Clear clipboard if PrintScreen is pressed
+document.addEventListener('keyup', (e) => {
+  if (e.key === 'PrintScreen') {
+    navigator.clipboard.writeText('');
+    alert('Screenshots are disabled on this page.');
+  }
 });
-window.addEventListener('focus', () => {
-  document.body.style.filter = 'none';
+
+// 3. Blur the screen if they open Snipping Tool, screen recorder, or switch tabs (loses window focus/visibility)
+const blurScreen = () => { document.body.style.filter = 'blur(25px)'; };
+const unblurScreen = () => { document.body.style.filter = 'none'; };
+
+window.addEventListener('blur', blurScreen);
+window.addEventListener('focus', unblurScreen);
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden || document.visibilityState === 'hidden') {
+    blurScreen();
+  } else {
+    unblurScreen();
+  }
 });
 
 // 4. Prevent touch drag to prevent mobile screen grab tricks
